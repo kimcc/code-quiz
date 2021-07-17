@@ -1,0 +1,44 @@
+:root {
+
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.quiz-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.start-button {
+    flex-basis: content;
+    align-self: center;
+    border: 0;
+    border-radius: 8px;
+    background-color: aqua;
+    padding: 4px 8px;
+}
+
+.start-button:hover {
+    
+}
+
+.center {
+    text-align: center;
+}
+
+
+.answer-button {
+}
+
+@media screen and (min-width: 700px) {
+    .start-button {
+        width: 100px;
+    }
+    .answer-button {
+        width: 100px;
+    }
+}
