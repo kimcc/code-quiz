@@ -25,13 +25,27 @@
 
         <div id="quizContainer" class="quiz-container">
             <!-- Reusable page element -->
-            <h1 id="quizTitle" class="quiz-title center"></h1> 
+            <h1 id="quizTitle" class="quiz-title center">Code Quiz</h1> 
 
             <!-- Starter page elements -->
-            <p id="quizIntro"></p>
-            <button id="startBtn" class="start-button">Start</button>   
+            <h2 id="quizIntro" class="quiz-subtitle center">Answer the following code-related questions within the time limit. Ready? Let's go!</h2>
+            <button id="startBtn" class="start-button">Start</button>  
+            
+            <!-- Quiz elements -->
+            <div id="answerContainer" class="answer-container hidden">
+                <div class="quiz-question">
+                    <h1 id="quizQuestion" class="quiz-subtitle">The question goes here</h1>
+                    <button class="answer-button" id="optionA"></button>
+                    <button class="answer-button" id="optionB"></button>
+                    <button class="answer-button" id="optionC"></button>
+                    <button class="answer-button" id="optionD"></button>
+                </div>
+                <div class="quiz-result">
+                    <h2 class="hidden" id="quizResult"></h2>
+                </div>
+            </div>
         </div>
 
-         <script src="./js/script.js" async defer></script>
+        <script src="./js/script.js" async defer></script>
     </body>
 </html>
