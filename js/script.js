@@ -7,6 +7,12 @@ const quizIntro = document.querySelector("#quizIntro");
 const answerContainer = document.querySelector("#answerContainer");
 const quizQuestion = document.querySelector("#quizQuestion");
 const quizResult =  document.querySelector("#quizResult");
+const initialsContainer = document.querySelector("#initialsContainer");
+const finalScore = document.querySelector("#finalScore");
+const submitButton = document.querySelector("#submitBtn");
+const initialsInput = document.querySelector("#initials");
+const scoreContainer = document.querySelector("#scoreContainer");
+const scoreList = document.querySelector("#scoreList");
 
 const optionA = document.querySelector("#optionA");
 const optionB = document.querySelector("#optionB");
@@ -15,6 +21,9 @@ const optionD = document.querySelector("#optionD");
 
 let score = 0;
 let currentNum = 0;
+let seconds = 90;
+let countDownTimer;
+let highScores = [];
 
 const questions = [
     {
@@ -69,19 +78,21 @@ const questions = [
     }
 ]
 
-// Create timer
-const countDown = function() {
-    let seconds = 90;
-    setInterval(function() {
-        seconds--;
-
-        if (seconds < 0) {
-            alert("Time's up!");
-            seconds = 90;
-        }
-        counter.textContent = `Time: ${seconds}`;
-    }, 1000);
+const changeTimer = function() {
+    countDownTimer = setInterval(timer, 1000);
 }
+
+// Create timer
+const timer = function() {
+    seconds--;
+
+    if (seconds < 0) {
+        highScoreInitials();
+        clearInterval(countDownTimer);
+    }
+    counter.textContent = `Time: ${seconds}`;
+}
+
 
 // Create question elements and set their text
 const createQuestions = function(currentQuestionChoices) {
@@ -123,8 +134,10 @@ const selectAnswerHandler = function(event) {
 
     if (event.target.textContent === findCorrectAnswer()) {
         quizResult.textContent = "You are correct!";
+        score+=10;
     } else {
         quizResult.textContent = "Sorry, you are incorrect!";
+        seconds-=10;
     }
     quizResult.classList.remove("fade");
 
@@ -133,18 +146,92 @@ const selectAnswerHandler = function(event) {
     if (currentNum < questions.length) {
         findCorrectAnswer();
     } else {
-        showHighScore();
+        highScoreInitials();
     }
-    
 }
 
 // Show the high score
-const showHighScore = function() {
-    alert("Show high score");
+const highScoreInitials = function() {
+    answerContainer.classList.add("hidden");
+    initialsContainer.classList.remove("hidden");
+    finalScore.textContent = `Your final score is ${score}`;
+    clearInterval(countDownTimer);
+}
+
+// Create the elements
+const createHighScoreEl = function(scoreObject) {
+
+    const scoreItemEl = document.createElement("li");
+    scoreItemEl.className = "score-item";
+    scoreItemEl.className = "score-list-item";
+
+    const scoreInitialsEl = document.createElement("div");
+    scoreInitialsEl.innerHTML = "<p>" + scoreObject.name + "</p>";
+
+    const scoreNumberEl = document.createElement("div");
+    scoreNumberEl.innerHTML = "<p>" + scoreObject.score + "</p>";
+
+    scoreList.appendChild(scoreItemEl);
+    scoreItemEl.appendChild(scoreInitialsEl);
+    scoreItemEl.appendChild(scoreNumberEl);
+
+    // Add high score to array
+    highScores.push(scoreObject);
+
+    // Save scores to local storage
+    saveScores();
+}
+
+// Save to local storage
+const saveScores = function() {
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    console.log("saveScores" + highScores);
+}
+
+// Loads scores from local storage
+const loadScores = function() {
+    let savedScores = localStorage.getItem("highScores");
+
+    // Sets to empty if scores is null
+    if (!savedScores) {
+        return false;
+    } 
+
+    savedScores = JSON.parse(savedScores);
+    savedScores.forEach(function(score) {
+        console.log("inside loadScores loop" + saveScores);
+        createHighScoreEl(score);
+    });
+}
+
+// Handle form submission
+const highScoreHandler = function() {
+    const initialsValue = initialsInput.value;
+
+    const highScoreObject = {
+        name: initialsValue,
+        score: score
+    };
+
+    loadScores();
+    createHighScoreEl(highScoreObject);
+    initialsInput.value = '';
+}
+
+submitButton.onclick = function(e) {
+
+    // Show alert if the input is empty
+    if (initialsInput.value === '') {
+        alert("Please enter your initials.");
+        return false;
+    }
+    e.preventDefault();
+    initialsContainer.classList.add("hidden");
+    highScoreHandler();
 }
 
 startButton.onclick = function() {
-    countDown();
+    changeTimer();
     answerContainer.classList.remove("hidden");
     quizTitle.classList.add("hidden");
     quizIntro.classList.add("hidden");

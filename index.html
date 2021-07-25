@@ -29,7 +29,7 @@
 
             <!-- Starter page elements -->
             <h2 id="quizIntro" class="quiz-subtitle center">Answer the following code-related questions within the time limit. Ready? Let's go!</h2>
-            <button id="startBtn" class="start-button">Start</button>  
+            <button id="startBtn" class="primary-button">Start</button>  
             
             <!-- Quiz elements -->
             <div id="answerContainer" class="answer-container hidden">
@@ -43,6 +43,27 @@
                 <div class="quiz-result">
                     <h2 class="hidden" id="quizResult"></h2>
                 </div>
+            </div>
+
+            <!-- High score input -->
+            <div id="initialsContainer" class="initials-container hidden">
+                <h1>All done!</h1>
+                <h2 id="finalScore"></h2>
+                <form>
+                    <h2>
+                        <label for="initials">Enter your initials</label>
+                    </h2>
+                    <input type="text" placeholder="Initials" id="initials" name="initials" class="initials-input">
+                    <button id="submitBtn" class="primary-button">Submit</button>
+                </form>
+            </div>
+
+            <!-- High scores -->
+            <div id="scoreContainer" class="score-container">
+                <ul id="scoreList">
+                <!-- Items will be added here -->
+                </ul>
+
             </div>
         </div>
 
