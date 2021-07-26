@@ -18,8 +18,8 @@
         <![endif]-->
 
         <!-- Top nav elements -->
-        <nav> 
-            <p id="showHighScore">View high scores</p>
+        <nav id="navigation"> 
+            <a id="showHighScore" href="high-scores.html">View high scores</a>
             <p id="counter">Time: 0</p>
         </nav>
 
@@ -59,7 +59,8 @@
             </div>
 
             <!-- High scores -->
-            <div id="scoreContainer" class="score-container">
+            <div id="scoreContainer" class="score-container hidden">
+                <h1>High scores</h1>
                 <ul id="scoreList">
                 <!-- Items will be added here -->
                 </ul>
@@ -67,6 +68,6 @@
             </div>
         </div>
 
-        <script src="./js/script.js" async defer></script>
+        <script src="./js/main.js" async defer></script>
     </body>
 </html>

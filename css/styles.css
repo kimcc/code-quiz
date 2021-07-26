@@ -41,9 +41,25 @@ h2 {
     line-height: 1em;
 }
 
-p {
+p, a {
     font-size: 2.5em;
     line-height: 0em;
+}
+
+a {
+    color: var(--blue);
+    text-decoration-color: transparent;
+    text-decoration-thickness: 2px;
+    margin: 40px 0px;
+}
+
+a:hover {
+    text-decoration-color: var(--blue);
+    transition: all 0.23s;
+}
+
+a:focus {
+    outline: 0;
 }
 
 nav {
@@ -160,15 +176,12 @@ form h2 {
     margin: 16px 0px 8px 0px;
 }
 
-.hidden {
-    display: none;
-}
-
 /* High score styling */
 .score-container {
     margin: 0 auto;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    align-items: center;
 }
 
 .score-container ul {
@@ -178,16 +191,27 @@ form h2 {
 
 .score-list-item {
     display: flex;
-    justify-content: space-around;
 }
 
+.score-list-item div {
+    padding: 0px 8px;
+}
+
+
+.score-container h1 {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
 
 /** Media queries **/
 @media screen and (min-width: 700px) {
     .primary-button {
         width: auto;
-        
     }
+    
     .answer-button {
         width: auto;
     }
