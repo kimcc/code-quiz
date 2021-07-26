@@ -24,7 +24,7 @@ const optionD = document.querySelector("#optionD");
 
 let score = 0;
 let currentNum = 0;
-let seconds = 30;
+let seconds = 60;
 let countDownTimer;
 let highScores = [];
 
@@ -142,7 +142,7 @@ const selectAnswerHandler = function(event) {
     } else {
         quizResult.textContent = "Sorry, you are incorrect!";
         quizResult.style.color = "#EFD29E";
-        seconds-=5;
+        seconds-=10;
     }
     quizResult.classList.remove("fade");
 
@@ -235,7 +235,7 @@ const highScoreHandler = function() {
 const reset = function() {
     score = 0;
     currentNum = 0;
-    seconds = 90;
+    seconds = 60;
 
     scoreContainer.classList.add("hidden");
     quizTitle.classList.remove("hidden");
